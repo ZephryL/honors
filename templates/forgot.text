@@ -1,0 +1,16 @@
+Hi there,
+{{ if .Fgt_Exists }}
+You have sucessfully generated a forgotten password request for Zephry Estate Management with the following credentials:
+Email: {{ .Fgt_Email }}
+
+Please click on the link below (yes, it's safe to do so) in order to verify your request:
+{{ .Fgt_Passthru }}
+
+If verified correctly, you will be presented with a forgotten password page, and can continue working.
+{{ else }}
+Your request to change a forgotten password has been denied because no user could be found with the associated email address "{{ .Fgt_Email }}".
+Please register a new account if you wish to make use of Zephry's Estate Management system.
+{{ end }}
+Best Regards,
+
+The Zephry Estate team

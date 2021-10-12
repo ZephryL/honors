@@ -90,10 +90,10 @@ func CreateRegister(s *System, aRegister *Register) error {
 		return err
 	}
 	// Send a register verify email
-	err = SendMailText(aRegister.Reg_Email, buffer.String())
-	if err != nil {
-		return err // Unknown mail error
-	}
+	// err = SendMailText(aRegister.Reg_Email, buffer.String())
+	// if err != nil {
+	// 	return err // Unknown mail error
+	// }
 
 	return nil // All good
 }

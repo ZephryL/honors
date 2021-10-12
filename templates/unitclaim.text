@@ -1,0 +1,9 @@
+Dear {{ .Usr_NameTarget }},
+
+A registered user of Zephry Estates named {{ .Usr_NameSource }} has claimed ownership of unit number {{ .Uni_Name }} at {{ .Est_Name }}.
+
+Please review your claims list, and either approve or reject this claim.
+
+Best Regards,
+
+The Zephry Estate team

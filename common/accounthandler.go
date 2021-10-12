@@ -199,7 +199,7 @@ func LoginHandler(s *System) func(http.ResponseWriter, *http.Request) {
 
 		// Encode user key and token as a cookie value - Hash keys should be at least 32 bytes long, Block keys should be 16 bytes (AES-128) or 32 bytes (AES-256) long.
 		value := map[string]string{"key": strconv.Itoa(vUsrKey), "token": vToken}
-		encoded, err := s.Cookie.Encode("zeph-cookie", value)
+		encoded, err := s.Cookie.Encode("zephacad-cookie", value)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(fmt.Sprintf("HTTP %v - Encode Error: %v", http.StatusInternalServerError, err.Error())))
@@ -207,7 +207,7 @@ func LoginHandler(s *System) func(http.ResponseWriter, *http.Request) {
 		}
 
 		// Create a cookie, set all attributes
-		cookie := &http.Cookie{Name: "zeph-cookie"}
+		cookie := &http.Cookie{Name: "zephacad-cookie"}
 		cookie.Value = encoded
 		SetCookieDefaults(cookie)
 		http.SetCookie(w, cookie)
@@ -228,16 +228,16 @@ func LoginHandler(s *System) func(http.ResponseWriter, *http.Request) {
 func LogoutHandler(s *System) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Test if a cookie was received
-		cookie, err := r.Cookie("zeph-cookie"); 
+		cookie, err := r.Cookie("zephacad-cookie")
 		if err != nil {
-			w.WriteHeader(http.StatusUnauthorized);
-			w.Write([]byte(fmt.Sprintf("HTTP %v - Couldn't find me no zeph-cookie: %v", http.StatusUnauthorized, err.Error())));
-			return;
+			w.WriteHeader(http.StatusUnauthorized)
+			w.Write([]byte(fmt.Sprintf("HTTP %v - Couldn't find me no zephacad-cookie: %v", http.StatusUnauthorized, err.Error())))
+			return
 		}
 		// User is authentic and authorized - Rewrite cookie defaults, set response cookie
-		cookie.Expires = time.Now().Add(-7 * 24 * time.Hour); // a week in the past
-		cookie.MaxAge = 0; // can't age
-		http.SetCookie(w, cookie);
+		cookie.Expires = time.Now().Add(-7 * 24 * time.Hour) // a week in the past
+		cookie.MaxAge = 0                                    // can't age
+		http.SetCookie(w, cookie)
 	}
 }
 

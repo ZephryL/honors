@@ -16,7 +16,7 @@ func IndexHandler(s *common.System) func(http.ResponseWriter, *http.Request) {
 		// Create a successful greeting, send success response
 		var vWelcome common.Welcome
 		vWelcome.Status = 0
-		vWelcome.Greeting = "Zephry Estates v0.1.0 is up and running. The following REST endpoints are available"
+		vWelcome.Greeting = "Zephry Academy v0.1.0 is up and running. Navigate to /routes for a list of endpoints."
 		vWelcome.Date = time.Now()
 
 		if err := json.NewEncoder(w).Encode(vWelcome); err != nil {

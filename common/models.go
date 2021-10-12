@@ -30,7 +30,7 @@ func (this *System) GetFlags() error {
 	flag.StringVar(&this.User, "user", "", "The database User")
 	flag.StringVar(&this.Password, "password", "password", "The database Password")
 	flag.StringVar(&this.Schema, "schema", "zephry", "The database Schema")
-	flag.IntVar(&this.Port, "port", 8080, "The server port")
+	flag.IntVar(&this.Port, "port", 8081, "The server port")
 	flag.Parse()
 	// Verify there are flags
 	if this.User == "" ||
@@ -89,7 +89,6 @@ type Welcome struct {
 	Date      time.Time  `json:"date"`
 	Status    int        `json:"status"`
 	Greeting  string     `json:"greeting"`
-	Endpoints []Endpoint `json:"endpoints"`
 }
 
 // Endpoint
